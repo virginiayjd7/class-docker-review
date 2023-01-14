@@ -1,22 +1,25 @@
 version: '3'
 
+
 services:
+
   app:
-    
-    build: 
+
+    build:
       context: .
       target: ${STAGE}
       dockerfile: Dockerfile
-
-    #command: yarn start:dev
+    
+    # command: yarn start:dev
     volumes:
       - .:/app/
-      - /app/node_modules #volume anonimo propio de node
+      - /app/node_modules
+
     container_name: nest-app
     ports:
       - ${PORT}:${PORT}
     environment:
-      APP_VERSION: ${APP_VERSION}   
+      APP_VERSION: ${APP_VERSION}
       STAGE: ${STAGE}
       DB_PASSWORD: ${DB_PASSWORD}
       DB_NAME: ${DB_NAME}
@@ -26,7 +29,7 @@ services:
       PORT: ${PORT}
       HOST_API: ${HOST_API}
       JWT_SECRET: ${JWT_SECRET}
-     
+  
   db:
     image: postgres:14.3
     restart: always
